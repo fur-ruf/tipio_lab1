@@ -17,7 +17,7 @@ public class Scenario {
 
     public void executeArthurStory() {
         Location earth = new Location("Earth", LocationType.PLANET,
-                new Coordinates(0, 0, 0, 2024));
+                new Coordinates(0, 0, 0, 2026));
         Location distantGalaxy = new Location("Distant Galaxy", LocationType.GALAXY,
                 new Coordinates(1000, 2000, 1500, 1000000));
 

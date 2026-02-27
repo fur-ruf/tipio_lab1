@@ -10,10 +10,9 @@ class BPlusTreeTest {
 
     @Test
     void testSplitRoot() {
-
         TreeDebugger debugger = new TreeDebugger();
         BPlusTree<Integer, String> tree =
-                new BPlusTree<>(2, debugger);
+                new BPlusTree<>(2, debugger); // соответствует 4
 
         tree.insert(10, "A");
         tree.insert(20, "B");
@@ -85,7 +84,7 @@ class BPlusTreeTest {
 
         assertTrue(actual.contains(TracePoint.UNDERFLOW)); // опустошили
         assertTrue(actual.contains(TracePoint.BORROW_LEFT)
-                || actual.contains(TracePoint.BORROW_RIGHT)); // заняли у соседей
+                || actual.contains(TracePoint.BORROW_RIGHT)); // заняли у соседей (левый)
     }
 
     @Test
