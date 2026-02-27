@@ -13,7 +13,7 @@ class CoordinatesTest {
         Coordinates coords2 = new Coordinates(3, 4, 0, 100);
 
         double distance = coords1.distanceTo(coords2);
-        assertEquals(105.0, distance, 0.001); // 5 + 100
+        assertEquals(105.0, distance, 0.001);
     }
 
     @Test

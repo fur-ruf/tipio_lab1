@@ -17,7 +17,7 @@ class FabricOfSpaceTimeTest {
     @BeforeEach
     void setUp() {
         fabric = new FabricOfSpaceTime();
-        testLocation = new Location("TestLocation", LocationType.PLANET,
+        testLocation = new Location("Earth", LocationType.PLANET,
                 new Coordinates(0, 0, 0, 0));
     }
 

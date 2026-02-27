@@ -19,4 +19,8 @@ public class People extends Being {
         spokenPhrases.add(phrase);
         return phrase;
     }
+
+    public List<Phrase> getSpokenPhrases() {
+        return this.spokenPhrases;
+    }
 }

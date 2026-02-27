@@ -50,4 +50,8 @@ public class FabricOfSpaceTime {
         addHole(hole);
         return hole;
     }
+
+    public List<SpaceTimeHole> getHoles() {
+        return this.holes;
+    }
 }

@@ -1,5 +1,6 @@
 package third_part;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import third_part.being.Creature;
 import third_part.being.CreatureState;
@@ -8,8 +9,9 @@ import third_part.location.*;
 import third_part.phrase.Phrase;
 import third_part.phrase.PhraseState;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class ScenarioTest {
 
@@ -21,9 +23,9 @@ class ScenarioTest {
     }
 
     @Test
+    @DisplayName("Тест истории")
     void testCompleteStoryFlow() {
         FabricOfSpaceTime fabric = new FabricOfSpaceTime();
-
         Location earth = new Location("Earth", LocationType.PLANET,
                 new Coordinates(0, 0, 0, 2024));
         Location distantGalaxy = new Location("Distant Galaxy", LocationType.GALAXY,
@@ -33,25 +35,35 @@ class ScenarioTest {
         fabric.addLocation(distantGalaxy);
 
         People arthur = new People("Arthur", earth);
-        Creature warrior = new Creature("Warrior", distantGalaxy, "FactionA");
-
         fabric.addBeing(arthur);
-        fabric.addBeing(warrior);
 
-        Phrase phrase = arthur.speak("Test phrase");
-        fabric.addPhrase(phrase);
+        Creature warrior1 = new Creature("Warrior1", distantGalaxy, "FactionA");
+        Creature warrior2 = new Creature("Warrior2", distantGalaxy, "FactionB");
+        fabric.addBeing(warrior1);
+        fabric.addBeing(warrior2);
 
-        assertEquals(earth, phrase.getLocation());
+        Phrase arthurPhrase = arthur.speak("А у меня, кажется, большие проблемы с образом жизни");
+        fabric.addPhrase(arthurPhrase);
 
-        SpaceTimeHole hole = new SpaceTimeHole(earth);
-        fabric.addHole(hole);
+        SpaceTimeHole randomHole = fabric.createRandomHole();
 
-        hole.teleport(phrase, distantGalaxy);
+        if (randomHole != null) {
+            randomHole.teleport(arthurPhrase, distantGalaxy);
+            arthurPhrase.setState(PhraseState.MOVING);
+            arthurPhrase.setLocation(distantGalaxy);
+            arthurPhrase.setState(PhraseState.LOST);
 
-        assertEquals(distantGalaxy, phrase.getLocation());
-        assertEquals(PhraseState.MOVING, phrase.getState());
+            warrior1.setState(CreatureState.ON_BALANCE);
+            warrior2.setState(CreatureState.ON_BALANCE);
+        }
 
-        warrior.setState(CreatureState.ON_BALANCE);
-        assertEquals(CreatureState.ON_BALANCE, warrior.getState());
+        Phrase testPhrase = arthur.getSpokenPhrases().get(0);
+        assertEquals(arthurPhrase, testPhrase);
+        assertEquals(distantGalaxy, testPhrase.getLocation());
+        assertEquals(PhraseState.LOST, testPhrase.getState());
+        assertEquals(CreatureState.ON_BALANCE, warrior1.getState());
+        assertEquals(CreatureState.ON_BALANCE, warrior2.getState());
+        assertTrue(arthur.getSpokenPhrases().contains(arthurPhrase));
+        assertTrue(fabric.getHoles().contains(randomHole));
     }
 }

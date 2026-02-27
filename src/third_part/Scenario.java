@@ -40,6 +40,8 @@ public class Scenario {
         if (randomHole != null) {
             randomHole.teleport(arthurPhrase, distantGalaxy);
             arthurPhrase.setState(PhraseState.MOVING);
+            arthurPhrase.setLocation(distantGalaxy);
+            arthurPhrase.setState(PhraseState.LOST);
 
             warrior1.setState(CreatureState.ON_BALANCE);
             warrior2.setState(CreatureState.ON_BALANCE);

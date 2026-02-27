@@ -13,9 +13,9 @@ class CreatureTest {
 
     @Test
     void testCreatureStateTransitions() {
-        Location location = new Location("Galaxy", LocationType.GALAXY,
+        Location location = new Location("Raspberry", LocationType.PLANET,
                 new Coordinates(100, 100, 100, 1000));
-        Creature creature = new Creature("Warrior", location, "FactionA");
+        Creature creature = new Creature("Palych", location, "Proletariat");
 
         assertEquals(CreatureState.PEACE, creature.getState());
 
@@ -28,10 +28,10 @@ class CreatureTest {
 
     @Test
     void testCreatureFaction() {
-        Location location = new Location("Galaxy", LocationType.GALAXY,
+        Location location = new Location("Raspberry", LocationType.PLANET,
                 new Coordinates(100, 100, 100, 1000));
-        Creature creature = new Creature("Warrior", location, "FactionA");
+        Creature creature = new Creature("Palych", location, "Proletariat");
 
-        assertEquals("FactionA", creature.getFaction());
+        assertEquals("Proletariat", creature.getFaction());
     }
 }

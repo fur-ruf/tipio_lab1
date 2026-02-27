@@ -18,7 +18,7 @@ class BPlusTreeTest {
         tree.insert(10, "A");
         tree.insert(20, "B");
         tree.insert(5, "C");
-        tree.insert(6, "D"); // вызывает split
+        tree.insert(6, "D");
 
         List<TracePoint> actual = debugger.get();
 
@@ -41,7 +41,7 @@ class BPlusTreeTest {
         List<TracePoint> actual = debugger.get();
 
         assertTrue(actual.contains(TracePoint.SPLIT_NODE));
-        assertTrue(actual.contains(TracePoint.INSERT_PARENT));
+        assertTrue(actual.contains(TracePoint.INSERT_PARENT)); // разделили не корневой узел, ключ закинули в родителя
     }
 
     @Test
@@ -62,7 +62,7 @@ class BPlusTreeTest {
         List<TracePoint> actual = debugger.get();
 
         assertTrue(actual.contains(TracePoint.DELETE_FROM_LEAF));
-        assertFalse(actual.contains(TracePoint.UNDERFLOW));
+        assertFalse(actual.contains(TracePoint.UNDERFLOW)); // удалили без опустошения
     }
 
     @Test
@@ -78,14 +78,14 @@ class BPlusTreeTest {
 
         debugger.clear();
 
-        tree.delete(30); // создаём underflow справа
+        tree.delete(30);
         tree.delete(20);
 
         List<TracePoint> actual = debugger.get();
 
-        assertTrue(actual.contains(TracePoint.UNDERFLOW));
+        assertTrue(actual.contains(TracePoint.UNDERFLOW)); // опустошили
         assertTrue(actual.contains(TracePoint.BORROW_LEFT)
-                || actual.contains(TracePoint.BORROW_RIGHT));
+                || actual.contains(TracePoint.BORROW_RIGHT)); // заняли у соседей
     }
 
     @Test
