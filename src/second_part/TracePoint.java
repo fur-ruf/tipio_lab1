@@ -1,0 +1,24 @@
+package second_part;
+
+public enum TracePoint {
+    FIND_START,
+    FIND_INTERNAL,
+    FIND_LEAF,
+
+    INSERT_START,
+    INSERT_DUPLICATE,
+    INSERT_INTO_LEAF,
+    SPLIT_NODE,
+    NEW_ROOT,
+    INSERT_PARENT,
+
+    DELETE_START,
+    DELETE_NOT_FOUND,
+    DELETE_FROM_LEAF,
+    UNDERFLOW,
+    BORROW_LEFT,
+    BORROW_RIGHT,
+    MERGE_LEFT,
+    MERGE_RIGHT,
+    ROOT_REPLACED
+}
