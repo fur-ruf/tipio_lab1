@@ -1,7 +1,5 @@
 node_modules/
 
-__snapshots__/
-
 .env
 .env.test
 .env.production
